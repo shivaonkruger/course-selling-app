@@ -1,18 +1,15 @@
-const express = require('express')
-const { userRoutes } = require('./routes/userRoutes')
-const { courseRoutes } = require('./routes/courseRoutes')
+const express = ('express')
+const { userRouter} = require('./routes/user')
+const { adminRouter} = require('./routes/admin')
+const { courseRouter } = require('./routes/course')
 
 const app = express()
 
 app.use(express.json());
-app.use('/users', userRoutes);
-app.use('/courses', courseRoutes);
 
-
-
-
-
-
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/admin', adminRouter);
+app.use('/api/v1/courses', courseRouter);
 
 app.listen(3000);
 
