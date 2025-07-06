@@ -1,9 +1,11 @@
-const express = ('express')
+const express = require('express');
+const mongoose = require("mongoose");
+const app = express();
 const { userRouter} = require('./routes/user')
 const { adminRouter} = require('./routes/admin')
 const { courseRouter } = require('./routes/course')
 
-const app = express()
+
 
 app.use(express.json());
 
@@ -11,9 +13,10 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/admin', adminRouter);
 app.use('/api/v1/courses', courseRouter);
 
-app.listen(3000);
-
-// const port = 3000
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`)
-// })
+async function main(){
+    await mongoose.connect ('mongodb+srv://shiva:shivagupta@cluster0.drkxqxr.mongodb.net/course-selling-app')
+    app.listen(3000);
+    console.log('Server is running on port 3000');
+}
+// if the connection with the database fails the app does not listen on port 3000
+main()
